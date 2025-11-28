@@ -1,0 +1,52 @@
+
+
+body{
+    background-color: #FEFDF8;
+}
+
+h1, h2, h3{
+    font-family: 'Playfair Display', serif, system-ui;
+    color: #2C5530;
+}
+
+header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+text{
+    color:#333333;
+}
+
+#mainTableDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#mainTable{
+    border: 3px solid #8B4513;
+    width: 1000px;
+}
+
+#buttonHolder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#addBookButton{
+    color: #8B4513;
+    background-color: #D4AF37;
+}
+
+th{
+    border: 2px solid #8B4513;
+}
+
+td{
+    color:#333333;
+    text-align: center;
+    border: 2px solid #8B4513;
+}
