@@ -27,18 +27,37 @@
                         <th>Pages</th>
                         <th>Read?</th>
                     </tr>
-                    <tr>
-                        <td>bookName</td>
-                        <td>bookAuthor</td>
-                        <td>400</td>
-                        <td>YES</td>
-                    </tr>
                 </thead>
+                <tbody id="mainTableBody">
+
+                </tbody>
             </table>
         </div>
         <div id="buttonHolder">
             <button id="addBookButton">Add book</button>
         </div>
     </main>
+    <footer>
+    </footer>
+    <dialog id="addBookDialog">
+        <h2> Book Details</h2>
+        <form id="addBookForm">
+                <label for="title" >Title:</label>
+                <input type="text" id="title" required>
+                <label for="author">Author:</label>
+                <input type="text" id="author" required>
+                <label for="pages">Pages:</label>
+                <input type="text" id="pages" required>   
+                <label for="readSelect">Read?:</label>
+                <select name="Read?" id="readSelect" required>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>         
+        </form>
+        <div class="dialogButtonDiv">
+            <button id="modalAddButton">Add Book</button>
+            <button id="modalCloseButton">Close</button>
+        </div>
+    </dialog>
 </body>
 </html>
