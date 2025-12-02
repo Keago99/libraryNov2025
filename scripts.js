@@ -1,6 +1,7 @@
 
 
 const addBookButton = document.querySelector("#addBookButton");
+const addToLibraryButton = document.querySelector("#modalAddButton");
 const mainTable = document.querySelector("#mainTable");
 const mainTableBody = document.querySelector("#mainTableBody");
 const addBookDialog = document.querySelector("#addBookDialog");
@@ -24,8 +25,6 @@ function ReadToggle(){
         }
 }
 
-function ClearLibrary(){}
-
 function displaybooks(){
 
     mainTableBody.innerHTML = "";
@@ -44,24 +43,50 @@ function displaybooks(){
         readButton.classList.toggle("readButton");
         readButton.setAttribute("data-book-id", Book.ID);
 
+        const deleteTd = document.createElement("td");
+        const deleteButton = document.createElement("button");
+        deleteButton.innerText = "X";
+        deleteButton.classList.toggle("deleteButton");
+        readButton.setAttribute("data-book-id", Book.ID);
+
         row.appendChild(title);
         row.appendChild(author);
         row.appendChild(pages);
 
         readTd.appendChild(readButton);
         row.appendChild(readTd);
+
+        deleteTd.appendChild(deleteButton);
+        row.appendChild(deleteTd);
         
         mainTableBody.appendChild(row);
         
     });
+    
     const readButtons = document.querySelectorAll(".readButton");
+    
     readButtons.forEach(button => {
         button.addEventListener("click", changeRead);
-    })
+    });
+
 }
 
 function addToLibrary(){
-    
+    const modalTitle = document.querySelector("#titleAdd").value;
+    const modalAuthor = document.querySelector("#authorAdd").value;
+    const modalPages = document.querySelector("#pagesAdd").value;
+    const modalRead = document.querySelector("#readSelectAdd").value;
+
+    if(modalTitle === "" || modalAuthor === "" || modalPages === "" || modalRead === "" ){
+        alert("Please fill out all fields!");
+        return;
+    }
+
+    const newBook = new Book(modalTitle, modalAuthor, modalPages, modalRead);
+    console.log(newBook);
+    Library.push(newBook);
+    displaybooks();
+
 }
 
 function changeRead(){
@@ -80,6 +105,8 @@ addBookButton.addEventListener("click", function(){
     addBookDialog.showModal();
 });
 
+addToLibraryButton.addEventListener("click", addToLibrary);
+
 modalCloseButton.addEventListener("click", function(){
     addBookDialog.close();
 })
@@ -87,7 +114,7 @@ modalCloseButton.addEventListener("click", function(){
 
 
 const Catch22 = new Book("Catch 22", "Joseph Heller", 300, "Yes");
-const testBook = new Book("TestTitle", "TestAuthor", 350, "Yes");
+const testBook = new Book("TestTitle", "TestAuthor", 350, "No");
 Library.push(Catch22);
 Library.push(testBook);
 displaybooks();

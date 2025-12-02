@@ -64,7 +64,7 @@ td{
     text-align: center;
     margin: 0;
     border: 0;
-    width: 200px;
+    width: 120px;
     height: 30px;
     border: 2px solid #8B4513;
     border-radius: 5px;
@@ -88,6 +88,14 @@ td{
 
 #buttonHolder{
     margin-top: 20px;
+}
+
+.deleteButton{
+    background-color: red;
+    color: white;
+    width: 50px;
+    height: 30px;
+    border: 2px solid #8B4513;;
 }
 
 

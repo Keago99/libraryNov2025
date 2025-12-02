@@ -26,6 +26,7 @@
                         <th>Author</th>
                         <th>Pages</th>
                         <th>Read?</th>
+                        <th>Remove book?</th>
                     </tr>
                 </thead>
                 <tbody id="mainTableBody">
@@ -42,22 +43,28 @@
     <dialog id="addBookDialog">
         <h2> Book Details</h2>
         <form id="addBookForm">
-                <label for="title" >Title:</label>
-                <input type="text" id="title" required>
-                <label for="author">Author:</label>
-                <input type="text" id="author" required>
-                <label for="pages">Pages:</label>
-                <input type="text" id="pages" required>   
-                <label for="readSelect">Read?:</label>
-                <select name="Read?" id="readSelect" required>
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
+                <label for="titleAdd" >Title:</label>
+                <input type="text" id="titleAdd">
+                <label for="authorAdd">Author:</label>
+                <input type="text" id="authorAdd">
+                <label for="pagesAdd">Pages:</label>
+                <input type="number" id="pagesAdd" min="30">   
+                <label for="readSelectAdd">Read?:</label>
+                <select name="Read?" id="readSelectAdd">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
                 </select>         
         </form>
         <div class="dialogButtonDiv">
             <button id="modalAddButton">Add Book</button>
             <button id="modalCloseButton">Close</button>
         </div>
+    </dialog>
+    <dialog id="areYouSure">
+        <h2>Are you sure</h2>
+        <p>Are you sure you would like to delete:</p>
+        <button>Yes</button>
+        <button>No</button>
     </dialog>
 </body>
 </html>
