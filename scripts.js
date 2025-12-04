@@ -5,7 +5,11 @@ const addToLibraryButton = document.querySelector("#modalAddButton");
 const mainTable = document.querySelector("#mainTable");
 const mainTableBody = document.querySelector("#mainTableBody");
 const addBookDialog = document.querySelector("#addBookDialog");
+const deleteBookDialog = document.querySelector("#deleteConfirmDialog");
 const modalCloseButton = document.querySelector("#modalCloseButton");
+const deleteConfirmDialog = document.querySelector("#deleteConfirmDialog");
+const deleteNoButton = document.querySelector("#deleteNoButton");
+
 
 const Library = [];
 
@@ -19,11 +23,6 @@ function Book(title, author, pages, read){
     this.read = read;
 }
 
-function ReadToggle(){
-    if (this.textContent === "Yes"){
-        this.textContent = "No";
-        }
-}
 
 function displaybooks(){
 
@@ -47,8 +46,8 @@ function displaybooks(){
         const deleteButton = document.createElement("button");
         deleteButton.innerText = "X";
         deleteButton.classList.toggle("deleteButton");
-        readButton.setAttribute("data-book-id", Book.ID);
-
+        deleteButton.setAttribute("data-book-id", Book.ID);
+    
         row.appendChild(title);
         row.appendChild(author);
         row.appendChild(pages);
@@ -64,11 +63,17 @@ function displaybooks(){
     });
     
     const readButtons = document.querySelectorAll(".readButton");
+    const deleteButtons = document.querySelectorAll(".deleteButton");
     
     readButtons.forEach(button => {
         button.addEventListener("click", changeRead);
     });
 
+    deleteButtons.forEach(button => {
+        button.addEventListener("click", function(){
+            deleteClick(this.dataset.bookId);
+        });
+    });
 }
 
 function addToLibrary(){
@@ -101,6 +106,22 @@ function changeRead(){
     displaybooks();
 }
 
+function deleteBookNo(){
+    deleteConfirmDialog.close();
+}
+
+function deleteClick(bookID){
+    console.log(bookID);
+    const indexOfBook = Library.findIndex(Book => Book.ID === bookID);
+    const bookTitle = Library[indexOfBook].title;
+
+    const bookTitleDiv = document.createElement("div");
+    bookTitleDiv.innerText = bookTitle;
+    deleteConfirmDialog.appendChild(bookTitleDiv);
+    deleteConfirmDialog.showModal();
+
+}
+
 addBookButton.addEventListener("click", function(){
     addBookDialog.showModal();
 });
@@ -111,6 +132,9 @@ modalCloseButton.addEventListener("click", function(){
     addBookDialog.close();
 })
 
+deleteNoButton.addEventListener("click", deleteBookNo);
+
+
 
 
 const Catch22 = new Book("Catch 22", "Joseph Heller", 300, "Yes");
@@ -118,3 +142,8 @@ const testBook = new Book("TestTitle", "TestAuthor", 350, "No");
 Library.push(Catch22);
 Library.push(testBook);
 displaybooks();
+
+
+// TODO:
+// Send the book ID datatype to the deleteConfirm dialog so the user can see 
+// which book they are deleting
