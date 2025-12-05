@@ -9,7 +9,8 @@ const deleteBookDialog = document.querySelector("#deleteConfirmDialog");
 const modalCloseButton = document.querySelector("#modalCloseButton");
 const deleteConfirmDialog = document.querySelector("#deleteConfirmDialog");
 const deleteNoButton = document.querySelector("#deleteNoButton");
-
+const deleteYesButton = document.querySelector("#deleteYesButton");
+const addBookForm = document.querySelector("#addBookForm");
 
 const Library = [];
 
@@ -91,6 +92,8 @@ function addToLibrary(){
     console.log(newBook);
     Library.push(newBook);
     displaybooks();
+    addBookDialog.close();
+    addBookForm.reset();
 
 }
 
@@ -106,20 +109,24 @@ function changeRead(){
     displaybooks();
 }
 
-function deleteBookNo(){
-    deleteConfirmDialog.close();
-}
-
 function deleteClick(bookID){
-    console.log(bookID);
+    deleteTitleSpan = document.querySelector("#bookTitleDelete");
+    deleteTitleSpan.innerText = "";
     const indexOfBook = Library.findIndex(Book => Book.ID === bookID);
     const bookTitle = Library[indexOfBook].title;
 
     const bookTitleDiv = document.createElement("div");
-    bookTitleDiv.innerText = bookTitle;
-    deleteConfirmDialog.appendChild(bookTitleDiv);
+    bookTitleDiv.innerText += bookTitle + "?";
+    deleteTitleSpan.appendChild(bookTitleDiv);
+    deleteYesButton.setAttribute("data-book-id", bookID);
     deleteConfirmDialog.showModal();
+}
 
+function deleteBookYes(bookID){
+    const indexOfBook = Library.findIndex(Book => Book.ID === bookID);
+    Library.splice(indexOfBook, 1);
+    deleteBookDialog.close();
+    displaybooks();
 }
 
 addBookButton.addEventListener("click", function(){
@@ -130,11 +137,16 @@ addToLibraryButton.addEventListener("click", addToLibrary);
 
 modalCloseButton.addEventListener("click", function(){
     addBookDialog.close();
+    addBookForm.reset();
 })
 
-deleteNoButton.addEventListener("click", deleteBookNo);
+deleteNoButton.addEventListener("click", function(){
+    deleteBookDialog.close();
+});
 
-
+deleteYesButton.addEventListener("click", function(){
+    deleteBookYes(this.dataset.bookId);
+});
 
 
 const Catch22 = new Book("Catch 22", "Joseph Heller", 300, "Yes");
